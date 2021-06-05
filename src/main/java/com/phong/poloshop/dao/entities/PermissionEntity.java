@@ -22,18 +22,18 @@ public class PermissionEntity implements Serializable{
 	@Id
 	@GeneratedValue
 	@Column(name = "PermissionId", nullable = false)
-	private int permissionId;
+	private Integer permissionId;
 	@Column(name="PermissionName")
 	private String permissionName;
 	@Column(name = "Status")
-	private boolean status;
+	private Boolean status;
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "permissions", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore
 	private Set<RolePermissionEntity> rolePermissions=new HashSet<RolePermissionEntity>();
 	public PermissionEntity() {
 		super();
 	}
-	public PermissionEntity(int permissionId, String permissionName, boolean status,
+	public PermissionEntity(Integer permissionId, String permissionName, Boolean status,
 			Set<RolePermissionEntity> rolePermissions) {
 		super();
 		this.permissionId = permissionId;
@@ -41,10 +41,10 @@ public class PermissionEntity implements Serializable{
 		this.status = status;
 		this.rolePermissions = rolePermissions;
 	}
-	public int getPermissionId() {
+	public Integer getPermissionId() {
 		return permissionId;
 	}
-	public void setPermissionId(int permissionId) {
+	public void setPermissionId(Integer permissionId) {
 		this.permissionId = permissionId;
 	}
 	public String getPermissionName() {
@@ -53,10 +53,10 @@ public class PermissionEntity implements Serializable{
 	public void setPermissionName(String permissionName) {
 		this.permissionName = permissionName;
 	}
-	public boolean isStatus() {
+	public Boolean isStatus() {
 		return status;
 	}
-	public void setStatus(boolean status) {
+	public void setStatus(Boolean status) {
 		this.status = status;
 	}
 	public Set<RolePermissionEntity> getRolePermissions() {

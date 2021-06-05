@@ -22,11 +22,11 @@ public class RoleEntity implements Serializable{
 	@Id
 	@GeneratedValue
 	@Column(name ="RoleId", nullable = false)
-	private int roleId;
+	private Integer roleId;
 	@Column(name = "RoleName")
 	private String roleName;
 	@Column(name = "Status")
-	private boolean status;
+	private Boolean status;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "roles", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore
 	private Set<RolePermissionEntity> rolePermissions=new HashSet<RolePermissionEntity>();
@@ -36,7 +36,7 @@ public class RoleEntity implements Serializable{
 	public RoleEntity() {
 		super();
 	}
-	public RoleEntity(int roleId, String roleName, boolean status, Set<RolePermissionEntity> rolePermissions,
+	public RoleEntity(Integer roleId, String roleName, Boolean status, Set<RolePermissionEntity> rolePermissions,
 			Set<UserRoleEntity> userRoles) {
 		super();
 		this.roleId = roleId;
@@ -45,10 +45,10 @@ public class RoleEntity implements Serializable{
 		this.rolePermissions = rolePermissions;
 		this.userRoles = userRoles;
 	}
-	public int getRoleId() {
+	public Integer getRoleId() {
 		return roleId;
 	}
-	public void setRoleId(int roleId) {
+	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
 	}
 	public String getRoleName() {
@@ -57,10 +57,10 @@ public class RoleEntity implements Serializable{
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
-	public boolean isStatus() {
+	public Boolean isStatus() {
 		return status;
 	}
-	public void setStatus(boolean status) {
+	public void setStatus(Boolean status) {
 		this.status = status;
 	}
 	public Set<RolePermissionEntity> getRolePermissions() {

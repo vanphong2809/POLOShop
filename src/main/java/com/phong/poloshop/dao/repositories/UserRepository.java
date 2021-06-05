@@ -18,9 +18,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Query(value = "select * from [USER] u where u.Email like :email", nativeQuery = true)
 	public UserEntity findUserByEmail(@Param("email") String email);
 	
-	@Query(value = "select * from [USER] u where u.UserName like ?1", nativeQuery = true)
-	//public UserEntity findUserByUserName(@Param("userName") String userName);
-	UserEntity findUserByUserName(String userName);
+	@Query(value = "select * from [USER] u where u.UserName=:userName", nativeQuery = true)
+	public UserEntity findUserByUserName(@Param("userName") String userName);
 	
 	@Query(value="select p.PermissionName from [USER] u join USER_ROLE ur on u.UserId=ur.UserId " + 
 			"join [ROLE] r on ur.RoleId=r.RoleId join ROLE_PERMISSION rp on rp.RoleId=r.RoleId " + 

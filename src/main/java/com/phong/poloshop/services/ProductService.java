@@ -9,7 +9,7 @@ public interface ProductService {
 	public List<ProductEntity> newProducts();
 	public List<ProductEntity> getBestSellerProducts();
 	public List<ProductEntity> promotionProducts();
-	public List<ProductEntity> getProductsByCatalog(int catalogId);
+	public List<ProductEntity> getProductsByCatalog(Integer catalogId);
 	ProductEntity getProductById(int id);
 	List<ProductEntity> search(String queryString);
 }

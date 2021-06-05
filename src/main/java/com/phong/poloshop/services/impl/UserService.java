@@ -28,26 +28,23 @@ import com.phong.poloshop.dao.entities.UserEntity;
 import com.phong.poloshop.dao.repositories.UserRepository;
 import com.phong.poloshop.services.UserServiceInterface;
 
-
 @Service
 @Transactional
-public class UserService implements UserServiceInterface {
+public class UserService implements UserDetailsService {
 	private Logger LOGGER = LoggerFactory.getLogger(UserService.class);
-	//@Autowired
 	private PasswordEncoder passwordEncoder;
-	//@Autowired
+	@Autowired
 	private UserRepository userRepository;
 	
 	public UserService() {
-		//super(tham so 1, tham so 2);
 	}
 
-	@Autowired
-	public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository) {
-		
-		this.passwordEncoder = passwordEncoder;
-		this.userRepository = userRepository;
-	}
+//	@Autowired
+//	public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository) {
+//		
+//		this.passwordEncoder = passwordEncoder;
+//		this.userRepository = userRepository;
+//	}
 
 	//@Transactional
 	public void register(UserEntity user) {
@@ -57,7 +54,17 @@ public class UserService implements UserServiceInterface {
 	}
 
 	//@Transactional
-	public UserDetails findUserByEmail(String email) {
+//	public UserDetails findUserByEmail(String email) {
+//		UserEntity user = new UserEntity();
+//		try {
+//			user = userRepository.findUserByEmail(email);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			LOGGER.error(e.getMessage());
+//		}
+//		return new CustomUserDetails(user);
+//	}
+	public UserEntity findUserByEmail(String email) {
 		UserEntity user = new UserEntity();
 		try {
 			user = userRepository.findUserByEmail(email);
@@ -65,24 +72,16 @@ public class UserService implements UserServiceInterface {
 			e.printStackTrace();
 			LOGGER.error(e.getMessage());
 		}
-		return new CustomUserDetails(user);
+		return user;
 	}
-	
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		System.out.println("UserName: "+username);
-		//UserEntity user=new UserEntity();
-		UserEntity user=userRepository.findById(20).get();
+	public UserDetails loadUserByUsername(String userName) {
+		UserEntity user=userRepository.findUserByUserName(userName);
 		System.out.println("UserName---: "+user);
-		//UserEntity user1=userRepository.findUserByUserName(username);
-		System.out.println("UserName---: "+user);
-//		if(userRepository.findUserByUserName(username)!=null) {
-//			user = userRepository.findUserByUserName(username);
-//		}
 		
 		if (user == null) {
-			System.out.println("Khong tim thay tai khoan " + username);
-			throw new UsernameNotFoundException("Nguoi dung " + username + " khong tim thay trong database");
+			System.out.println("Khong tim thay tai khoan " + userName);
+			throw new UsernameNotFoundException("Nguoi dung " + userName + " khong tim thay trong database");
 		}
 		List<String> permissionName = (List<String>) userRepository.getPermissionName(user.getUserId());
 		List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
@@ -96,6 +95,30 @@ public class UserService implements UserServiceInterface {
 				user.getPassword(), grantList);
 		return userDetails;
 	}
+//	@Override
+//	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+////		UserEntity user=userRepository.findById(20).get();
+//		UserEntity user=userRepository.findUserByUserName(userName);
+//		System.out.println("UserName---: "+user);
+//		
+//		if (user == null) {
+//			System.out.println("Khong tim thay tai khoan " + userName);
+//			throw new UsernameNotFoundException("Nguoi dung " + userName + " khong tim thay trong database");
+//		}
+//		List<String> permissionName = (List<String>) userRepository.getPermissionName(user.getUserId());
+//		List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
+//		if (permissionName != null) {
+//			for (String role : permissionName) {
+//				GrantedAuthority authority = new SimpleGrantedAuthority(role);
+//				grantList.add(authority);
+//			}
+//		}
+//		UserDetails userDetails = (UserDetails) new User(user.getUserName(), //
+//				user.getPassword(), grantList);
+//		return userDetails;
+//	}
+
+	
 //
 //	@Transactional
 //	public UserDetails loadUserById(Integer id) {

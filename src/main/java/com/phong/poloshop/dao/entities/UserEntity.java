@@ -38,7 +38,7 @@ public class UserEntity implements Serializable{
 	@Column(name = "CreatedAt")
 	private Date createdAt;
 	@Column(name = "IsSuperAdmin")
-	private boolean isSuperAdmin;
+	private Boolean isSuperAdmin;
 	@Column(name = "Status")
 	private Integer status;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -48,7 +48,7 @@ public class UserEntity implements Serializable{
 		super();
 	}
 	public UserEntity(Integer userId, String userName, String password, String email, String address, String phone,
-			Date createdAt, boolean isSuperAdmin, Integer status, Set<UserRoleEntity> userRoles) {
+			Date createdAt, Boolean isSuperAdmin, Integer status, Set<UserRoleEntity> userRoles) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -103,10 +103,10 @@ public class UserEntity implements Serializable{
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-	public boolean isSuperAdmin() {
+	public Boolean isSuperAdmin() {
 		return isSuperAdmin;
 	}
-	public void setSuperAdmin(boolean isSuperAdmin) {
+	public void setSuperAdmin(Boolean isSuperAdmin) {
 		this.isSuperAdmin = isSuperAdmin;
 	}
 	public Integer getStatus() {

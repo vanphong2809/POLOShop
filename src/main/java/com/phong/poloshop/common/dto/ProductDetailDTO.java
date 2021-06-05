@@ -7,8 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+//@AllArgsConstructor
+//@NoArgsConstructor
 @ToString
 public class ProductDetailDTO implements Serializable{
 	private static final long serialVersionUID = -4186228668922923702L;

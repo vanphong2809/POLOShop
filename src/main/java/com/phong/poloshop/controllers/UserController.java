@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.phong.poloshop.common.dto.ResponseDataDTO;
+import com.phong.poloshop.dao.entities.CustomUserDetails;
 import com.phong.poloshop.dao.entities.UserEntity;
 import com.phong.poloshop.services.impl.UserService;
 import com.phong.poloshop.validator.UserValidator;
@@ -99,14 +100,14 @@ public class UserController {
 		return response;
 	}
 
-//	@RequestMapping(method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
-//	@ResponseBody
-//	public ResponseDataDTO<UserEntity> findUserByEmail(@RequestParam("email") String email) {
-//		ResponseDataDTO<UserEntity> response = new ResponseDataDTO<UserEntity>();
-//		UserDetails user = userService.findUserByEmail(email);
-//		response.setData(user);
-//		return response;
-//	}
+	@RequestMapping(method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@ResponseBody
+	public ResponseDataDTO<UserEntity> findUserByEmail(@RequestParam("userName") String email) {
+		ResponseDataDTO<UserEntity> response = new ResponseDataDTO<UserEntity>();
+		CustomUserDetails user =(CustomUserDetails) userService.loadUserByUsername(email);
+		response.setData(user.getUser());
+		return response;
+	}
 //	@RequestMapping(value = "/{userName}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
 //	@ResponseBody
 //	public ResponseDataDTO<UserEntity> findUserByUserName(@PathVariable String userName){

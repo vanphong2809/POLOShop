@@ -50,6 +50,8 @@ public class ProductEntity implements Serializable{
 	private int promotion;
 	@Column(name = "Status")
 	private int status;
+	@Column(name = "Price")
+	private int price;
 	@ManyToOne
 	@JoinColumn(name = "CatalogId")
 	private CatalogEntity catalog;
@@ -85,7 +87,7 @@ public class ProductEntity implements Serializable{
 	}
 
 	public ProductEntity(int productId, String productName, String content, String contentDetail, String image,
-			int view, int buyItem, int quantity, Date createdAt, Date updatedAt, int promotion, int status, 
+			int view, int buyItem, int quantity, Date createdAt, Date updatedAt, int promotion, int status, int price,
 			CatalogEntity catalog) {
 		super();
 		this.productId = productId;
@@ -100,6 +102,7 @@ public class ProductEntity implements Serializable{
 		this.updatedAt = updatedAt;
 		this.promotion = promotion;
 		this.status = status;
+		this.price = price;
 		this.catalog = catalog;
 	}
 
@@ -197,6 +200,14 @@ public class ProductEntity implements Serializable{
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 	public CatalogEntity getCatalog() {

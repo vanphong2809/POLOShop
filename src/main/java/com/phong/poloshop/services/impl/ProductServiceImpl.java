@@ -78,7 +78,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<ProductEntity> getProductsByCatalog(int catalogId) {
+	public List<ProductEntity> getProductsByCatalog(Integer catalogId) {
 		List<ProductEntity> list=new ArrayList<ProductEntity>();
 		try {
 			list=productRepository.getProductsByCatalog(catalogId);

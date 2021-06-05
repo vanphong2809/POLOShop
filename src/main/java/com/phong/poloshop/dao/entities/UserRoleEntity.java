@@ -18,9 +18,9 @@ public class UserRoleEntity implements Serializable{
 	@Id
 	@GeneratedValue
 	@Column(name = "UserRoleId", nullable = false)
-	private int userRoleId;
+	private Integer userRoleId;
 	@Column(name="IsActive")
-	private boolean isActive;
+	private Boolean isActive;
 	@ManyToOne
 	@JoinColumn(name="RoleId")
 	private RoleEntity roles;
@@ -30,7 +30,7 @@ public class UserRoleEntity implements Serializable{
 	public UserRoleEntity() {
 		super();
 	}
-	public UserRoleEntity(int userRoleId, boolean isActive, RoleEntity roles,
+	public UserRoleEntity(Integer userRoleId, Boolean isActive, RoleEntity roles,
 			UserEntity users) {
 		super();
 		this.userRoleId = userRoleId;
@@ -38,16 +38,16 @@ public class UserRoleEntity implements Serializable{
 		this.roles = roles;
 		this.users = users;
 	}
-	public int getUserRoleId() {
+	public Integer getUserRoleId() {
 		return userRoleId;
 	}
-	public void setUserRoleId(int userRoleId) {
+	public void setUserRoleId(Integer userRoleId) {
 		this.userRoleId = userRoleId;
 	}
-	public boolean isActive() {
+	public Boolean isActive() {
 		return isActive;
 	}
-	public void setActive(boolean isActive) {
+	public void setActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
 	public RoleEntity getRoles() {

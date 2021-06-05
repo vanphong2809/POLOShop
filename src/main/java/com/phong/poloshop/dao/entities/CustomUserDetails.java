@@ -10,7 +10,6 @@ public class CustomUserDetails implements UserDetails{
 	UserEntity user;
 	
 	public CustomUserDetails(com.phong.poloshop.dao.entities.UserEntity user) {
-		super();
 		this.user = user;
 	}
 

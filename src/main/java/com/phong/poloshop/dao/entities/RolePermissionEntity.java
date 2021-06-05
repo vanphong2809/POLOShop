@@ -20,9 +20,9 @@ public class RolePermissionEntity implements Serializable{
 	@Id
 	@GeneratedValue
 	@Column(name = "RolePermissionId", nullable = false)
-	private int rolePermissionId;
+	private Integer rolePermissionId;
 	@Column(name = "IsActive")
-	private boolean isActive;
+	private Boolean isActive;
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PermissionId")
 	private PermissionEntity permissions;
@@ -32,7 +32,7 @@ public class RolePermissionEntity implements Serializable{
 	public RolePermissionEntity() {
 		super();
 	}
-	public RolePermissionEntity(int rolePermissionId, boolean isActive, PermissionEntity permissions,
+	public RolePermissionEntity(Integer rolePermissionId, Boolean isActive, PermissionEntity permissions,
 			RoleEntity roles) {
 		super();
 		this.rolePermissionId = rolePermissionId;
@@ -40,16 +40,16 @@ public class RolePermissionEntity implements Serializable{
 		this.permissions = permissions;
 		this.roles = roles;
 	}
-	public int getRolePermissionId() {
+	public Integer getRolePermissionId() {
 		return rolePermissionId;
 	}
-	public void setRolePermissionId(int rolePermissionId) {
+	public void setRolePermissionId(Integer rolePermissionId) {
 		this.rolePermissionId = rolePermissionId;
 	}
-	public boolean isActive() {
+	public Boolean isActive() {
 		return isActive;
 	}
-	public void setActive(boolean isActive) {
+	public void setActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
 	public PermissionEntity getPermissions() {

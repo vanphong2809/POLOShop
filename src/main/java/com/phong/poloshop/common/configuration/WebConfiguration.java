@@ -14,7 +14,7 @@ public class WebConfiguration implements WebMvcConfigurer{
 		ReloadableResourceBundleMessageSource messageSource=new ReloadableResourceBundleMessageSource();
 		//Tai file validation.properties
 		messageSource.setBasename("classpath:validation");
-//		messageSource.setDefaultEncoding("UTF-8");
+		messageSource.setDefaultEncoding("UTF-8");
 		return messageSource;
 	}
 }

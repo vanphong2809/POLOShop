@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +23,7 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 
-	@RequestMapping(value = "/all", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(value = "/all", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
 	public ResponseDataDTO<List<ProductEntity>> getAllProduct() {
 		ResponseDataDTO<List<ProductEntity>> response = new ResponseDataDTO<List<ProductEntity>>();
@@ -33,7 +34,7 @@ public class ProductController {
 		return response;
 	}
 
-	@RequestMapping(value = "/hot", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(value = "/hot", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
 	public ResponseDataDTO<List<ProductEntity>> getHotProducts() {
 		ResponseDataDTO<List<ProductEntity>> response = new ResponseDataDTO<List<ProductEntity>>();
@@ -44,7 +45,7 @@ public class ProductController {
 
 	}
 
-	@RequestMapping(value = "/new", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(value = "/new", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
 	public ResponseDataDTO<List<ProductEntity>> getNewProducts() {
 		ResponseDataDTO<List<ProductEntity>> response = new ResponseDataDTO<List<ProductEntity>>();
@@ -54,7 +55,7 @@ public class ProductController {
 		return response;
 	}
 
-	@RequestMapping(value = "/promotion", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(value = "/promotion", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
 	public ResponseDataDTO<List<ProductEntity>> getPromotionProducts() {
 		ResponseDataDTO<List<ProductEntity>> response = new ResponseDataDTO<List<ProductEntity>>();
@@ -64,7 +65,7 @@ public class ProductController {
 		return response;
 	}
 
-	@RequestMapping(value = "/best-seller", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(value = "/best-seller", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
 	public ResponseDataDTO<List<ProductEntity>> getBestSellerProducts() {
 		ResponseDataDTO<List<ProductEntity>> response = new ResponseDataDTO<List<ProductEntity>>();
@@ -74,7 +75,7 @@ public class ProductController {
 		return response;
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(value = "/{id}", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
 	public ResponseDataDTO<ProductEntity> getProductById(@PathVariable int id) {
 		ResponseDataDTO<ProductEntity> response = new ResponseDataDTO<ProductEntity>();
@@ -82,11 +83,20 @@ public class ProductController {
 		response.setData(product);
 		return response;
 	}
-	@RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+	@RequestMapping(method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
 	public ResponseDataDTO<List<ProductEntity>> search(@RequestParam("search") String queryString){
 		ResponseDataDTO<List<ProductEntity>> response=new ResponseDataDTO<List<ProductEntity>>();
 		List<ProductEntity> listProduct=productService.search(queryString);
+		response.setData(listProduct);
+		response.setLength(listProduct.size());
+		return response;
+	}
+	@RequestMapping(value="/similar/{catalogId}",method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+	@ResponseBody
+	public ResponseDataDTO<List<ProductEntity>> getProductsByCatalog(@PathVariable Integer catalogId){
+		ResponseDataDTO<List<ProductEntity>> response = new ResponseDataDTO<List<ProductEntity>>();
+		List<ProductEntity> listProduct=productService.getProductsByCatalog(catalogId);
 		response.setData(listProduct);
 		response.setLength(listProduct.size());
 		return response;
